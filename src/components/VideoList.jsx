@@ -1,10 +1,7 @@
-var VideoList = () => (
+var VideoList = (props) => (
   <div className="video-list">
-    <div><h5><em>videoListEntry</em> view goes here</h5></div>
-    <div><h5><em>videoListEntry</em> view goes here</h5></div>
-    <div><h5><em>videoListEntry</em> view goes here</h5></div>
-    <div><h5><em>videoListEntry</em> view goes here</h5></div>
-    <div><h5><em>videoListEntry</em> view goes here</h5></div>
+    {props.videos.map(video => <VideoListEntry video={video} />
+    )}
   </div>
 );
 
@@ -17,3 +14,9 @@ VideoList.propTypes = {
 // In the ES6 spec, files are "modules" and do not share a top-level scope.
 // `var` declarations will only exist globally where explicitly defined.
 window.VideoList = VideoList;
+
+// in App.js, for every video in our call for Video List, we want to add a video to child divs
+
+//inside video-list class, run mao
+
+// <div><h5><em>videoListEntry</em> view goes here</h5></div>
