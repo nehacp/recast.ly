@@ -16,11 +16,8 @@ var searchYouTube = (query, callback) => {
   }
 
   fetch(request)
-  .then(response => { 
-    if (response.status === 200) {
-      return response.json();
-    }
-  }).then(data => callback({videoList: data.items, videoPlayer: data.items[0]}))
+  .then(response => response.json())
+  .then(data => callback({videoList: data.items, videoPlayer: data.items[0]}))
   .catch((response) => console.log('failed request', response));
 
 // $.ajax({
