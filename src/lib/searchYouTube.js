@@ -1,4 +1,10 @@
-var searchYouTube = (options, callback) => {
+var defaults = {
+  key: window.YOUTUBE_API_KEY,
+  query: 'react',
+  max: 5
+};
+
+var searchYouTube = (options = defaults, callback) => {
   $.ajax({
     url: 'https://www.googleapis.com/youtube/v3/search',
     type: 'GET',
@@ -10,9 +16,8 @@ var searchYouTube = (options, callback) => {
       'videoEmbeddable': 'true',
       'part': 'snippet'
     },
-    success: (data) => {
-      console.log('received data', data);
-      callback(data.items);
+    success: (data) => { 
+      callback({videoList: data.items, videoPlayer: data.items[0]});
     },
     error: () => {
       console.log('failed request');
@@ -21,8 +26,4 @@ var searchYouTube = (options, callback) => {
 };
 
 window.searchYouTube = searchYouTube;
-// 'masxResults': '5',
-//     'q': 
-//     'part': 'snippet',
-//     'videoEmbeddl':
-//{ key: 'API_KEY', query: 'cats', max: 10 }
+

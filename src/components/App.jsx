@@ -3,8 +3,8 @@ class App extends React.Component {
     super(props);
 
     this.state = {
-      videoPlayer: this.props.videos[0],
-      videoList: this.props.videos
+      videoPlayer: {id: { videoId: null}, snippet: {title: '', description: ''} },
+      videoList: []
     };
   }
 
@@ -30,18 +30,23 @@ class App extends React.Component {
             <div><VideoPlayer video={this.state.videoPlayer}/></div>
           </div>
           <div className="col-md-5">
-            <div><VideoList videos={this.props.videos} click={this.onClickOfTitle.bind(this)}/></div>
+            <div><VideoList videos={this.state.videoList} click={this.onClickOfTitle.bind(this)}/></div>
           </div>
         </div>
       </div>
     );
   }
 
+  componentDidMount() {
+    this.props.searchYouTube(undefined, this.setState.bind(this));
+  }
+
 }
 
 window.App = App;
 
+
 ReactDOM.render(
-  <App videos={window.exampleVideoData}/>, 
+  <App searchYouTube={window.searchYouTube}/>, 
   document.getElementById('app')
 );
