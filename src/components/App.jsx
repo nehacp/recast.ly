@@ -3,13 +3,17 @@ class App extends React.Component {
     super(props);
 
     this.state = {
-      videoPlayer: this.props.videos[0]
+      videoPlayer: this.props.videos[0],
+      videoList: this.props.videos
     };
   }
 
-  onClickOfTitle() {
-    console.log('this', this);
+  onClickOfTitle(video) {
     this.setState({videoPlayer: video});
+  }
+
+  onSearch(videos) {
+    this.setState({videoList: videos});  
   }
 
   render() {
