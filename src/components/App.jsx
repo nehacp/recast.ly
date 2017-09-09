@@ -4,7 +4,8 @@ class App extends React.Component {
 
     this.state = {
       videoPlayer: {id: { videoId: null}, snippet: {title: '', description: ''} },
-      videoList: []
+      videoList: [],
+      search: 'react',
     };
   }
 
@@ -16,13 +17,18 @@ class App extends React.Component {
     this.setState({videoList: videos});  
   }
 
+  handleClick(searchFor) {
+    console.log(searchFor);
+    this.setState({search: this.props.searchYouTube(searchFor)});
+  }
+
   render() {
 
     return (
       <div>
         <nav className="navbar">
           <div className="col-md-6 offset-md-3">
-            <div><h5><em>search</em> view goes here</h5></div>
+            <div><Search search={this.state.search} click={this.handleClick.bind(this)}/></div>
           </div>
         </nav>
         <div className="row">
@@ -38,7 +44,7 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    this.props.searchYouTube(undefined, this.setState.bind(this));
+    this.props.searchYouTube(this.state.search, this.setState.bind(this));
   }
 
 }

@@ -1,17 +1,11 @@
-var defaults = {
-  key: window.YOUTUBE_API_KEY,
-  query: 'react',
-  max: 5
-};
-
-var searchYouTube = (options = defaults, callback) => {
+var searchYouTube = (query, callback) => {
   $.ajax({
     url: 'https://www.googleapis.com/youtube/v3/search',
     type: 'GET',
     data: {
-      'key': options.key,
-      'q': options.query,
-      'maxResults': options.max,
+      'key': window.YOUTUBE_API_KEY,
+      'q': query,
+      'maxResults': 5,
       'type': 'video',
       'videoEmbeddable': 'true',
       'part': 'snippet'
