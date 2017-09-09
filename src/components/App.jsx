@@ -13,13 +13,12 @@ class App extends React.Component {
     this.setState({videoPlayer: video});
   }
 
-  onSearch(videos) {
-    this.setState({videoList: videos});  
-  }
-
-  handleClick(searchFor) {
-    console.log(searchFor);
-    this.setState({search: this.props.searchYouTube(searchFor)});
+  handleClick(searchFor) { 
+    let input = document.querySelector('.form-control');
+    let search = input ? input.value : null;
+    _.debounce(() => {
+      this.props.searchYouTube(search, this.setState.bind(this));
+    }, 500)();
   }
 
   render() {
@@ -28,7 +27,7 @@ class App extends React.Component {
       <div>
         <nav className="navbar">
           <div className="col-md-6 offset-md-3">
-            <div><Search search={this.state.search} click={this.handleClick.bind(this)}/></div>
+            <div><Search click={this.handleClick.bind(this)}/></div>
           </div>
         </nav>
         <div className="row">
